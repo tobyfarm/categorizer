@@ -3,19 +3,21 @@ import { connect } from "react-redux";
 
 import "./App.css";
 
-import { createChart, setActiveChartIndex } from "../ducks/chart";
+import { addDataset, createChart, setActiveChartIndex } from "../ducks/chart";
 
 import ActiveChart from "./ActiveChart/ActiveChart";
+import AddDataset from "./AddDataset/AddDataset";
 import NewChart from "./NewChart/NewChart";
 import Sidebar from "./Sidebar/Sidebar";
 
 class App extends Component {
 	render() {
 		const {
-			  activeChart,
-			 charts,
-			 createChart,
-			 setActiveChartIndex
+			  activeChart
+			, addDataset
+			, charts
+			, createChart
+			, setActiveChartIndex
 		} = this.props;
 
 		return (
@@ -34,6 +36,10 @@ class App extends Component {
 					</header>
 					<div className="app__active-chart">
 						<ActiveChart chart={ activeChart } />
+						<AddDataset
+							addDataset={ addDataset }
+							labels={ activeChart.labels }
+						/>
 					</div>
 				</main>
 			</div>
@@ -48,4 +54,4 @@ function mapStateToProps( { activeChartIndex, charts } ) {
 	};
 }
 
-export default connect( mapStateToProps, { createChart, setActiveChartIndex } )( App );
+export default connect( mapStateToProps, { addDataset, createChart, setActiveChartIndex } )( App );
